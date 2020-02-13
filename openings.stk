@@ -1,0 +1,53 @@
+[M]
+0/0/0							#0 empty matrix
+0/0110_0110/0						#1 mid o
+
+0011_0000/1000_1000/0					#2 j in i spin opening
+0011/0/0						#3 j in i spin opening fill
+
+0011/1000_1000/0					#4 l in l opening
+
+0001_0001_0000/1000_1000/0				#5 s in s opening
+0001/0/0						#6 s in s opening fill
+
+0/0110_0110_0000_0000_0000/0				#7 mid o in long opening
+0001_0001_0000_0000_0000/1000_1000_0000_0000_0000/0	#8 left o in long opening
+0001_0001_0001/1000_1000_1000/0				#9 left o in long opening fill
+
+0/0100_0110_0010/0					#10 s covering
+0/0100/0						#11 s covering fill
+
+0/1000_1000_1100/0					#12 l in long opening
+
+0001_0001_0011/0/0 					#13 j in long opening
+
+0001_0001/1100/0					#14 j in misc opening
+
+0/1000_1000_1000_1000_0000/0				#15 i in misc opening
+
+[K]
+O(1)		#0
+
+J(2,3)		#1
+
+L(4)		#2
+
+S(5,6)		#3
+
+O(7,10)		#4
+O(8,9)		#5
+S(10,11)	#6
+L(12)		#7
+J(13)		#8
+
+J(14)		#9
+I(15,14)	#10
+
+[O]
+{0,1} 		#i spin opening
+{0,2}		#l opening
+{0,3}		#s opening
+{4,5,6,7,8}	#long opening
+{9,10,6,4}	#misc opening
+
+
