@@ -9,7 +9,11 @@ import ztacker.environment.MainEnvironment;
 
 public final class CommandConverter {
     
+	/** How long to delay before robot taps a key input */
+	private static final int TAP_DELAY = 30;
+	
     private static final int PAUSE_DELAY = 150;
+    private static final int CONTINUE_DELAY = 150;
     
     public static final HashMap<Command, Integer> COMMAND_KEY_MAP
             = new HashMap<>();
@@ -81,6 +85,7 @@ public final class CommandConverter {
         COMMAND_KEY_MAP.put(Command.DROP, KeyEvent.VK_SPACE);
         COMMAND_KEY_MAP.put(Command.HOLD, KeyEvent.VK_C);
         COMMAND_KEY_MAP.put(Command.PAUSE, KeyEvent.VK_ESCAPE);
+        COMMAND_KEY_MAP.put(Command.CONTINUE, KeyEvent.VK_ENTER);
         COMMAND_KEY_MAP.put(Command.ROTATE_CCW, KeyEvent.VK_Z);
         COMMAND_KEY_MAP.put(Command.ROTATE_CW, KeyEvent.VK_X);
         COMMAND_KEY_MAP.put(Command.SOFT_DROP, KeyEvent.VK_DOWN);
@@ -93,6 +98,7 @@ public final class CommandConverter {
         initRotationCommands();
         initTapCommands();
         initPauseCommand();
+        initContinueCommand();
     }
 
     private static void initDASCommands() {
@@ -186,12 +192,22 @@ public final class CommandConverter {
                 });
     }
 
+    /**
+     * Generates an <tt>Instruction</tt> telling the bot to press a key until 
+     * a non vertical change of the grid has happened (i.e.) a rotation/hold/hard drop.
+     * Once this occurs the bot will release the key.
+     * @param command the command that the bot is executing
+     * @return the generated <tt>Instruction</tt>
+     */
     private static Instruction generateTapInstruction(Command command) {
         return (Robot robot, MainEnvironment be) -> {
             int key = COMMAND_KEY_MAP.get(command);
             boolean[][] bg0 = be.getGridCapturer().getGrid();
 
             boolean nvchange = false;
+            //delay button tap by a bit since Nullpomino adds some lag when a piece is spawned where
+            //it cannot be affected by rotations, sometimes even tap movements are affected.
+            robot.delay(TAP_DELAY);
             while (!nvchange) {
                 robot.keyPress(key);
                 if (!be.updateCapture()) {
@@ -200,6 +216,7 @@ public final class CommandConverter {
                 }
 
                 boolean[][] bg1 = be.getGridCapturer().getGrid();
+                
                 nvchange
                         = be.getGridCapturer().isNonVerticalChange(bg0, bg1);
             }
@@ -209,10 +226,28 @@ public final class CommandConverter {
     }
 
     private static void initPauseCommand() {
-        COMMAND_INSTRUCTION_MAP.put(Command.PAUSE, (r, ge) -> {
-            int key = COMMAND_KEY_MAP.get(Command.PAUSE);
+    	initKeyCommand(Command.PAUSE, PAUSE_DELAY);
+    }
+    
+    /**
+     * Initializes a command that makes the bot press the continue key
+     */
+    private static void initContinueCommand() {
+    	initKeyCommand(Command.CONTINUE, CONTINUE_DELAY);
+    }
+    
+    /**
+     * Initialize a command that tells the bot to press a key and delay it by a given amount
+     * 
+     * @param command the command to be associated with the created <tt>Instruction</tt>
+     * @param delayAmount how much to delay the key release by in ms
+     */
+    private static void initKeyCommand(Command command, int delayAmount) {
+    	COMMAND_INSTRUCTION_MAP.put(command, (r, ge) -> {
+            int key = COMMAND_KEY_MAP.get(command);
+            
             r.keyPress(key);
-            r.delay(PAUSE_DELAY);
+            r.delay(delayAmount);
             r.keyRelease(key);
         });
     }

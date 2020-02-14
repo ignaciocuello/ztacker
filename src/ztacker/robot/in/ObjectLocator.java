@@ -8,8 +8,11 @@ import java.awt.image.BufferedImage;
 
 public final class ObjectLocator {
 
-    public static final int WIDTH = 587;
-    public static final int HEIGHT = 500;
+	//TODO make this be read from a file
+	/** The width of the portion of the screen that is captured */
+    public static final int WIDTH = 300;
+    /** The height of the portion of the screen that is captured */
+    public static final int HEIGHT = 350;
 
     private final int[] gameCorner;
     private final int[] startCorner;

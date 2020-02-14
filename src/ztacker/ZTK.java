@@ -17,9 +17,7 @@ import ztacker.framework.Dynamic;
 import ztacker.framework.MainFrameWork;
 import ztacker.robot.in.GridCapturerDisplay;
 import ztacker.robot.in.InputWrapper;
-import ztacker.robot.in.modes.MarathonInputWrapper;
 import ztacker.robot.in.modes.SprintInputWrapper;
-import ztacker.robot.in.modes.SurvivalInputWrapper;
 import ztacker.robot.in.modes.UltraInputWrapper;
 
 public final class ZTK {
@@ -58,18 +56,28 @@ public final class ZTK {
         frameWork.start();
     }
 
+    /**
+     * Prompts the user to choose the game mode that they are going to be playing on.
+     * Game modes currently supported are "Ultra" and "Sprint". The user needs to choose
+     * a game mode because the grid UI is different for different game modes, which alters
+     * how ztacker analyzes the game window. 
+     * @param frame the main frame of the application 
+     * @return an <tt>InputWrapper</tt> object corresponding to the game mode chosen
+     */
     private static InputWrapper promptSelectMode(JFrame frame) {
-        InputWrapper[] modes = {
-            new MarathonInputWrapper(),
+        //only allow user to choose sprint or ultra, as these are the
+    	//only modes the bot supports on Nullpomino
+    	InputWrapper[] modes = {
             new SprintInputWrapper(),
-            new SurvivalInputWrapper(),
             new UltraInputWrapper()
         };
+    	
         InputWrapper selectedMode = (InputWrapper) JOptionPane.showInputDialog(
                 frame,
                 "Select a game mode", TITLE,
                 JOptionPane.INFORMATION_MESSAGE, null,
                 modes, modes[modes.length - 1]);
+        
         return selectedMode;
     }
 

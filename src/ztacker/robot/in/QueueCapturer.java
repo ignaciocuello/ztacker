@@ -25,11 +25,12 @@ public final class QueueCapturer {
         if (gmsrc == null) {
             return null;
         }
-
+        
         LinkedList<Tetromino> queue = new LinkedList<>();
         for (int i = 0; i < queueX.length; i++) {
             Tetromino t = null;
             int pc = gmsrc.getRGB(queueX[i], queueY[i]);
+            
             for (int color : colorMap.keySet()) {
                 if (colorDist(pc, color) < THRESHOLD_DIST) {
                     t = colorMap.get(color);

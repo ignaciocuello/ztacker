@@ -7,7 +7,7 @@ public enum Command {
     ROTATE_CW, ROTATE_CCW, 
     TAP_LEFT, TAP_RIGHT, 
     DROP, HOLD, SOFT_DROP,
-    PAUSE;
+    PAUSE, CONTINUE;
     
     private static final HashMap<Command, Command> MIRROR 
             = new HashMap<>();

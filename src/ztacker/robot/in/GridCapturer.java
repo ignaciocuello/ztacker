@@ -2,12 +2,14 @@ package ztacker.robot.in;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
 import ztacker.matrix.Matrix;
-import ztacker.robot.out.CommandConverter;
 import ztacker.test.GameDisplay;
 
 public final class GridCapturer {
 
+	private static final int BLACK = 0xff000000;
+	
     private final int gridX;
 
     private final int gridY;
@@ -38,11 +40,16 @@ public final class GridCapturer {
         unsetRGBGrid = new int[Matrix.MAX_REAL_HEIGHT + 1][Matrix.MAX_WIDTH];
     }
 
+    /**
+     * Initializes the unsetRGBGrid array with the hex values of the colour of each grid element
+     * when it is unoccupied by a tetromino piece. This is so that when we detect that the colour
+     * of the grid element is different than this value, we know that it is occupied.
+     */
     public void initUnsetRGBGrid() {
         for (int y = 0; y < unsetRGBGrid.length; y++) {
             for (int x = 0; x < unsetRGBGrid[y].length; x++) {
-                unsetRGBGrid[y][x] = gmsrc.getRGB(gridX + x * gridXStep,
-                        +(y == 0 ? gridUpperY : (gridY + (y - 1) * gridYStep)));
+            	//TODO add this as an option to be read from file
+            	unsetRGBGrid[y][x] = BLACK;
             }
         }
     }
@@ -54,7 +61,7 @@ public final class GridCapturer {
             for (int x = 0; x < bgrid[y].length; x++) {
                 bgrid[y][x]
                         = gmsrc.getRGB(gridX + x * gridXStep,
-                                +(y == 0 ? gridUpperY : (gridY + (y - 1)
+                                (y == 0 ? gridUpperY : (gridY + (y - 1)
                                         * gridYStep))) != unsetRGBGrid[y][x];
             }
         }
@@ -149,7 +156,7 @@ public final class GridCapturer {
     public boolean isNonVerticalChange(boolean[][] bgrid0, boolean[][] bgrid1) {
         boolean[][] norm0 = getNorm(bgrid0);
         boolean[][] norm1 = getNorm(bgrid1);
-
+        
         for (int y = 0; y < norm0.length; y++) {
             for (int x = 0; x < norm0[y].length; x++) {
                 if (norm0[y][x] != norm1[y][x]) {

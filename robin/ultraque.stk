@@ -1,3 +1,3 @@
-{(FF258097/I),(FF4464E9/J),(FFFF7E25/L),(FFD5A541/O),(FF7CD424/S),(FFD24CAD/T),(FFFA325A/Z)} #colorMap
-[522,522,522,522,522] #queueX
-[145,210,260,310,360] #queueY
+{(ff01ffff/I),(ff0000ff/J),(ffff8001/L),(ffffff01/O),(ff00ff00/S),(ffff01ff/T),(ffff0000/Z)} #colorMap
+[206,206,206,206,206] #queueX
+[33,97,161,225,289] #queueY
