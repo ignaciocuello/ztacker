@@ -1,7 +1,7 @@
 # Ztacker
 **Ztacker** is a Tetris bot that uses ST/ZT stacking
 
-- Here's [Nullpomino](https://github.com/nullpomino/nullpomino) an open-source implementation of tetris, its pretty great.
+- Here's [Nullpomino](https://github.com/nullpomino/nullpomino) an open-source implementation of tetris, its pretty neat.
 ![](nullpo.gif)
 
 - Now here's Ztacker playing a quick game of tetris.
