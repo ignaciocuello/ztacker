@@ -1,6 +1,6 @@
 # Ztacker
 
-**Ztacker** is a Tetris bot that utilizes [ST stacking](https://four.lol/stacking/st) to maximise its score in the Tetris *Ultra* game mode.
+**Ztacker** is a Tetris bot that utilizes [ST stacking](https://www.youtube.com/watch?v=-LJt-sXe_XA) to maximise its score in the Tetris *Ultra* game mode.
 
 ## About Ztacker
 
