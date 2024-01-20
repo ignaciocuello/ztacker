@@ -42,3 +42,10 @@ The bot chooses to horizontally mirror the way it normally uses pieces if it fin
 
 ![](zt.gif)
 
+## Project History
+
+### Original Development
+Ztacker was first developed in 2017, born out of a love for both Tetris and programming.
+
+### Migration to GitHub
+The project, along with its documentation, was uploaded to GitHub in 2020. This move was intended to archive the work and make it accessible to the public.
